@@ -59,7 +59,7 @@ script:
   - lunch omni_AUM-eng
   - mka adbd recoveryimage
 after_success:
-    - cp $HOME/omni/out/target/product/AUM/recovery.img $HOME/omni/TWRP-AUM_L29-$(date +"%Y%m%d").img
+    - cp $HOME/omni/out/target/product/AUM/recovery.img $HOME/omni/TWRP-AUM_L29-recovery_ramdisk-$(date +"%Y%m%d").img
   
 
 deploy:
