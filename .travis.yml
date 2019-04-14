@@ -1,0 +1,77 @@
+dist: xenial
+sudo: required
+language: java
+
+before_install:
+  - wget https://github.com/sormuras/bach/raw/master/install-jdk.sh
+
+matrix:
+  include:
+# 8
+    - env: JDK='Oracle JDK 8'
+      jdk: oraclejdk8
+    - env: JDK='OpenJDK 8'
+      jdk: openjdk8
+# 9
+    - env: JDK='Oracle JDK 9'
+      jdk: oraclejdk9
+    - env: JDK='OpenJDK 9'
+      install: . ./install-jdk.sh -F 9
+# 10
+    - env: JDK='Oracle JDK 10'
+      jdk: oraclejdk10
+    - env: JDK='OpenJDK 10'
+      install: . ./install-jdk.sh -F 10 -L GPL
+# 11
+    - env: JDK='Oracle JDK 11'
+      install: . ./install-jdk.sh -F 11 -L BCL
+    - env: JDK='OpenJDK 11'
+      install: . ./install-jdk.sh -F 11 -L GPL
+  allow_failures:
+    - env: JDK='Oracle JDK 10'
+    
+git:
+  depth: 3
+
+addons:
+  apt:
+    update:
+    - true
+before_script:
+  - echo PATH = ${PATH}
+  - echo JAVA_HOME = ${JAVA_HOME}
+  - java -version
+  - sudo apt-get install gperf gcc-multilib g++-multilib libc6-dev-i386 lib32ncurses5-dev x11proto-core-dev libx11-dev lib32z-dev libgl1-mesa-dev libxml2-utils xsltproc
+  - mkdir -p ~/bin
+  - curl https://storage.googleapis.com/git-repo-downloads/repo > ~/bin/repo
+  - chmod a+x ~/bin/repo
+script:
+  - mkdir -p ~/omni
+  - cd ~/omni
+  - repo init --depth=1 -u git://github.com/minimal-manifest-twrp/platform_manifest_twrp_omni.git -b twrp-8.0
+  - repo sync --force-sync -j32
+  - git clone https://github.com/algphello/android_device_honor_7a.git device/honor/AUM
+  - source build/envsetup.sh
+  - lunch omni_AUM-eng
+  - export ALLOW_MISSING_DEPENDENCIES=true
+  - export LC_ALL=C
+  - source build/envsetup.sh
+  - lunch omni_AUM-eng
+  - mka adbd recoveryimage
+after_success:
+    - cp $HOME/omni/out/target/product/AUM/recovery.img $HOME/omni/TWRP-AUM_L29-$(date +"%Y%m%d").img
+  
+
+deploy:
+  skip_cleanup: true
+  provider: releases
+  api_key: "$GitOAUTHToken_KERNEL"
+  file_glob: true
+  file: $HOME/omni/*.img
+  on:
+    tags: false
+    repo: algphello/android_device_honor_7a
+    branch: master
+branches:
+  except:
+    - /^(?i:untagged)-.*$/
