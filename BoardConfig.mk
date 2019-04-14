@@ -29,7 +29,7 @@ BOARD_KERNEL_PAGESIZE := 2048
 BOARD_KERNEL_TAGS_OFFSET := 0x00000100
 BOARD_RAMDISK_OFFSET := 0x01000000
 BOARD_CUSTOM_BOOTIMG_MK := device/honor/AUM/mkbootimg.mk
-<<<<<<< HEAD
+
 TARGET_PREBUILT_KERNEL := $(LOCAL_PATH)/recovery/dummykernel
 TARGET_KERNEL_CROSS_COMPILE_PREFIX := aarch64-linux-androidkernel-
 KERNEL_TOOLCHAIN := $(ANDROID_BUILD_TOP)/prebuilts/gcc/$(HOST_OS)-x86/aarch64/aarch64-linux-android-4.9/bin
@@ -38,16 +38,6 @@ KERNEL_TOOLCHAIN := $(ANDROID_BUILD_TOP)/prebuilts/gcc/$(HOST_OS)-x86/aarch64/aa
 BOARD_PLAT_PRIVATE_SEPOLICY_DIR += $(DEVICE_PATH)/sepolicy/private
 BOARD_PLAT_PUBLIC_SEPOLICY_DIR += $(DEVICE_PATH)/sepolicy/public
 include vendor/omni/sepolicy/sepolicy.mk
-=======
-TARGET_PREBUILT_KERNEL := $(LOCAL_PATH)/kernel
-#TARGET_KERNEL_CROSS_COMPILE_PREFIX := aarch64-linux-androidkernel-
-#KERNEL_TOOLCHAIN := $(ANDROID_BUILD_TOP)/prebuilts/gcc/$(HOST_OS)-x86/aarch64/aarch64-linux-android-4.9/bin
-#TARGET_KERNEL_CONFIG := FIH-msm8937-perf_defconfig
-#TARGET_KERNEL_SOURCE := kernel/honor/AUM
-#BOARD_KERNEL_IMAGE_NAME := Image.gz-dtb
-#TARGET_KERNEL_HEADER_ARCH := arm64
-#TARGET_KERNEL_ARCH := arm64
->>>>>>> d48d51e89922e27005e8e08e8cae5db4c25e5107
 
 # Partitions
 BOARD_FLASH_BLOCK_SIZE := 131072
