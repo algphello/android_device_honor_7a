@@ -16,10 +16,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
 #$(shell touch $(OUT)/recovery/root/file_contexts)
 
 #Hackery
-$(shell mkdir -p $(OUT)/obj/ETC/sepolicy.recovery_intermediates)
-$(shell mkdir -p $(OUT)obj/ETC/sepolicy_intermediates) 
-$(shell cp device/honor/AUM/sepolicy $(OUT)/obj/ETC/sepolicy.recovery_intermediates/sepolicy.recovery)
-$(shell cp device/honor/AUM/sepolicy $(OUT)/obj/ETC/sepolicy_intermediates/sepolicy)
+#$(shell mkdir -p $(OUT)/obj/ETC/sepolicy.recovery_intermediates)
+#$(shell mkdir -p $(OUT)obj/ETC/sepolicy_intermediates) 
+#$(shell cp device/honor/AUM/sepolicy $(OUT)/obj/ETC/sepolicy.recovery_intermediates/sepolicy.recovery)
+#$(shell cp device/honor/AUM/sepolicy $(OUT)/obj/ETC/sepolicy_intermediates/sepolicy)
 
 # Screen density
 PRODUCT_AAPT_CONFIG := normal
